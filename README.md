@@ -12,17 +12,20 @@
 
 **Demo 2-1**
   * Detect the noise pixel by pixel, using the average brightness of surrounding pixel(top, down, left, right) to determine the noise
-  * Using the avergae brightness to replace the original(target) brightness if the target considerate as noise
+  * Using the average brightness to replace the original(target) brightness if the target considerate as noise
   ![sample2](https://cloud.githubusercontent.com/assets/16344700/25113380/886989b2-2429-11e7-838d-b2757e9516ae.png "Before noise processing")[/Before processing/]
-  ![smaple2-process](https://cloud.githubusercontent.com/assets/16344700/25113491/73be4e66-242a-11e7-93f7-673309461fae.png "After noise proccessing")[/After processing]
+  ![smaple2-process](https://cloud.githubusercontent.com/assets/16344700/25113491/73be4e66-242a-11e7-93f7-673309461fae.png "After noise processing")[/After processing]
 
 **Demo 2-2**
   * Detect the noise pixel by pixel, using the average brightness of surrounding pixel(top, down, left, right, topOfLeft, topOfRight, downOfLeft, downOfRight, itself) to determine the noise
-  * Using the avergae brightness(exclude the most two higher and lower pixel) to replace the original(target) brightness if the target considerate as noise
+  * Using the average brightness(exclude the most two higher and lower pixel) to replace the original(target) brightness if the target considerate as noise
 
-**Pros and Corns for Demo 2-1 & 2-2**
+**Pros and Corns for Demo 2-1 & Demo 2-2**
+  * Demo 2-2 method would cost more CPU computing and memory usage resources than Demo 2-1
+  * Demo 2-2 eliminate the most two higher and lower pixel may reduce the extreme value to affect the noise replacement
 
-*Refernce link*
+*Reference link*
 [Cosine wave](https://willould.files.wordpress.com/2014/10/cosine-graph.jpg?w=604)
 [Moiré pattern](https://en.wikipedia.org/wiki/Moir%C3%A9_pattern)
 [Brightness of color RGB](http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color)
+
