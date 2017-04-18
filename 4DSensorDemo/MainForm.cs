@@ -35,8 +35,6 @@ namespace _4DSensorDemo
         {
             try
             {
-                //var filePath = @"D:\Interview\4D\4DSensorDemo\Sample\Input\sample2.png";
-
                 OpenFileDialog dialog = new OpenFileDialog();
                 dialog.Filter = "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff" + "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|";
                 dialog.Title = "Select a image file";
@@ -149,6 +147,7 @@ namespace _4DSensorDemo
                     switch (surroundings.Length)
                     {
                         case 5:
+                            // calcuate average exclude itself
                             avgBrightness = surroundings.ToList().GetRange(0, 4).Where(s => s != -1).Sum() / surroundings.ToList().GetRange(0, 4).Where(s => s != -1).Count();
                             if (Math.Abs(surroundings[(int)SurroundingEnum.Center] - avgBrightness) > threshold)
                             {
@@ -175,13 +174,13 @@ namespace _4DSensorDemo
                                 var validateCount = surroundings.Where(v => v != -1).Count();
                                if (validateCount == 9)
                                 {
+                                    // exclude the most higher and most lower pixels and calculate the average
                                     adjustBrightness = (surroundings.ToList().GetRange(2, 5).Sum() / 5) - surroundings[(int)SurroundingEnum.Center];
                                     var pixelR = (newImage.GetPixel(x, y).R + adjustBrightness) > 255 ? 255 : (newImage.GetPixel(x, y).R + adjustBrightness) < 0 ? 0 : (newImage.GetPixel(x, y).R + adjustBrightness);
                                     var pixelG = (newImage.GetPixel(x, y).G + adjustBrightness) > 255 ? 255 : (newImage.GetPixel(x, y).G + adjustBrightness) < 0 ? 0 : (newImage.GetPixel(x, y).G + adjustBrightness);
                                     var pixelB = (newImage.GetPixel(x, y).B + adjustBrightness) > 255 ? 255 : (newImage.GetPixel(x, y).B + adjustBrightness) < 0 ? 0 : (newImage.GetPixel(x, y).B + adjustBrightness);
 
                                     newImage.SetPixel(x, y, Color.FromArgb(pixelR, pixelG, pixelB));
-                                    //newImage.SetPixel(x, y, Color.LightGreen);
                                 }
 
                             }
@@ -192,7 +191,6 @@ namespace _4DSensorDemo
             }
 
             // save to ouput
-            //newImage.Save(@"D:\Interview\4D\4DSensorDemo\Sample\Output\sample2.png");
             newImage.Save(outputPath);
         }
 

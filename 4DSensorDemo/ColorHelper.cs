@@ -26,7 +26,7 @@ namespace _4DSensorDemo
         /// </summary>
         /// <param name="color">input color</param>
         /// <param name="factor">range for 1(lightest) to -1(darkest)</param>
-        /// <returns></returns>
+        /// <returns>color with new brightness</returns>
         public Color ChangeColorBrightness(Color color, float factor)
         {
             float red = (float)color.R;

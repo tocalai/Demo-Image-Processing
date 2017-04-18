@@ -32,6 +32,7 @@ namespace _4DSensorDemo
             var heightInMilimeter = this.ClientSize.Height / graphicsObj.DpiY * ColorHelper.milimetresPerInch;
             var widthInMilimeter = this.ClientSize.Width / graphicsObj.DpiX * ColorHelper.milimetresPerInch;
 
+            // start with pure white
             var colorChangedBrightness = ColorHelper.Instance.ChangeColorBrightness(Color.Black, 1);
             Pen blackPen = new Pen(colorChangedBrightness, 1f);
             Pen whitePen = new Pen(Color.White, 1f);
@@ -44,8 +45,8 @@ namespace _4DSensorDemo
             {
                 BlackSPoint = L1sPoint,
                 BlackEPoint = L1ePoint,
-                WhiteSPoint = new PointF((float)L1sPoint.X + whitePen.Width, (float)L1sPoint.Y),
-                WhiteEPoint = new PointF((float)L1ePoint.X + whitePen.Width, (float)L1ePoint.Y)
+                WhiteSPoint = new PointF(L1sPoint.X + whitePen.Width, L1sPoint.Y),
+                WhiteEPoint = new PointF(L1ePoint.X + whitePen.Width, L1ePoint.Y)
             };
 
             list.Add(firstPair);
@@ -60,8 +61,9 @@ namespace _4DSensorDemo
 
                 var unit = (1 - (-1)) / (widthInMilimeter);
                 var round = Math.Floor((widthInMilimeter));
-                var mutiple = cycleCount > round ? 1 : round / cycleCount;
+                var mutiple = cycleCount > round ? 1 : round / cycleCount;// let the brightness changed more significantly
 
+                // calculate the factor of brightness, changed from light to black
                 var factor = (float)((1 - cycle * mutiple * unit));
                 colorChangedBrightness = ColorHelper.Instance.ChangeColorBrightness(Color.Black, factor);
                 blackPen.Color = colorChangedBrightness;
@@ -69,14 +71,14 @@ namespace _4DSensorDemo
                 Debug.WriteLine(string.Format("cycle = {0}, factor = {1}", cycle, factor));
 
                 var preSet = list[list.Count - 1];
-                PointF LnsPoint = new PointF((float)preSet.WhiteSPoint.X + (float)whitePen.Width, preSet.WhiteSPoint.Y);
-                PointF LnePoint = new PointF((float)preSet.WhiteEPoint.X + (float)whitePen.Width, preSet.WhiteEPoint.Y);
+                PointF LnsPoint = new PointF(preSet.WhiteSPoint.X + whitePen.Width, preSet.WhiteSPoint.Y);
+                PointF LnePoint = new PointF(preSet.WhiteEPoint.X + whitePen.Width, preSet.WhiteEPoint.Y);
                 LinePair newPair = new LinePair()
                 {
                     BlackSPoint = LnsPoint,
                     BlackEPoint = LnePoint,
-                    WhiteSPoint = new PointF((float)LnsPoint.X + blackPen.Width, (float)LnsPoint.Y),
-                    WhiteEPoint = new PointF((float)LnePoint.X + blackPen.Width, (float)LnePoint.Y)
+                    WhiteSPoint = new PointF(LnsPoint.X + blackPen.Width, LnsPoint.Y),
+                    WhiteEPoint = new PointF(LnePoint.X + blackPen.Width, LnePoint.Y)
                 };
 
                 graphicsObj.DrawLine(blackPen, newPair.BlackSPoint, newPair.BlackEPoint);
