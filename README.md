@@ -22,8 +22,8 @@
 
 **Pros and Corns for Demo 2-1 & Demo 2-2**
   * Demo 2-2 method would cost more CPU computing and memory usage resources than Demo 2-1
-  * Demo 2-2 eliminate the most two higher and lower pixel may reduce the extreme value to affect the noise replacement
-
+  * Demo 2-2 eliminate the most two higher and lower pixel may reduce the extreme value to affect the noise replacement
+  
 *Reference link*
 [Cosine wave](https://willould.files.wordpress.com/2014/10/cosine-graph.jpg?w=604)
 [Moiré pattern](https://en.wikipedia.org/wiki/Moir%C3%A9_pattern)
